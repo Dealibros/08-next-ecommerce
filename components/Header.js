@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
+import Image from 'next/Image';
 import Link from 'next/link';
+import sunshine from '../public/sunshine.svg';
 
 const navContainer = css`
   margin-right: auto;
@@ -15,17 +17,35 @@ const nav = css`
   background-color: black;
   color: white !important;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   list-style: none;
   margin: 0;
   text-decoration: none;
-  padding-bottom: 1rem;
-  padding-top: 0.8rem;
+  padding-bottom: 0.6rem;
+  padding-top: 0.6rem;
+`;
+
+const navdiv = css`
+  margin-bottom: 0;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white !important;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  text-decoration: none;
+  padding-bottom: 0.6rem;
+  padding-top: 0.6rem;
+  padding: 0.6rem 2rem 0.6rem 2rem;
 `;
 
 const navLi = css`
   font-size: 1.3rem;
-  padding: 0 1.8rem 0 1.8rem;
+  padding: 0 3rem 0 3rem !important;
 
   :active {
     font-size: 1rem;
@@ -42,35 +62,47 @@ const a = css`
   }
 `;
 
+const sunshineLogo = css`
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  padding-left: 2rem;
+`;
+
 function Header() {
   return (
     <div css={navContainer}>
       <nav>
         <ul css={nav}>
-          <li css={navLi}>
-            <Link href="/">
-              <a css={a}>Home</a>
-            </Link>
-          </li>
-          <li css={navLi}>
-            <Link href="/tours">
-              <a css={a}>Tours</a>
-            </Link>
-          </li>
-          <li css={navLi}>
-            <Link href="/contact-page">
-              <a css={a}>Contact us</a>
-            </Link>
-          </li>
-          <li css={navLi}>
-            <Link href="/shopping-cart-page">
-              <a css={a}>
-                <span role="img" aria-label="cart">
-                  🛒
-                </span>
-              </a>
-            </Link>
-          </li>
+          <div css={navdiv}>
+            <Image css={sunshineLogo} src={sunshine} alt="logo" />
+          </div>
+          <div css={navdiv}>
+            <li css={navLi}>
+              <Link href="/">
+                <a css={a}>Home</a>
+              </Link>
+            </li>
+            <li css={navLi}>
+              <Link href="/tours">
+                <a css={a}>Tours</a>
+              </Link>
+            </li>
+            <li css={navLi}>
+              <Link href="/contact-page">
+                <a css={a}>Contact us</a>
+              </Link>
+            </li>
+            <li css={navLi}>
+              <Link href="/shopping-cart-page">
+                <a css={a}>
+                  <span role="img" aria-label="cart">
+                    🛒
+                  </span>
+                </a>
+              </Link>
+            </li>
+          </div>
         </ul>
       </nav>
     </div>

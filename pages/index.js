@@ -18,6 +18,15 @@ const main = css`
   position: relative;
 `;
 
+const title = css`
+  font-family: 'New Tegomin';
+  color: white;
+  font-weight: 700;
+  font-size: 4.6rem;
+  text-align: center;
+  margin-top: -0.8rem;
+`;
+
 // const portadaStyle = css`
 //   min-height: 80vh;
 //   height: 15rem !important;
@@ -36,7 +45,7 @@ export default function Home() {
       <Layout>
         <main css={main}>
           {/* <Image css={portadaStyle} src={portada} alt="portada" /> */}
-          <p>Travel the World</p>
+          <p css={title}>Travel the World</p>
         </main>
       </Layout>
     </div>
