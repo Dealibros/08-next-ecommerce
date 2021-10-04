@@ -101,6 +101,13 @@ function Header() {
                   </span>
                 </a>
               </Link>
+              <Link href="/thank-you-page">
+                <a css={a}>
+                  <span role="img" aria-label="cart">
+                    🛒
+                  </span>
+                </a>
+              </Link>
             </li>
           </div>
         </ul>

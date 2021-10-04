@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import Link from 'next/link';
 
 // const nav = css`
 // display:flex;
@@ -37,26 +36,6 @@ function Footer() {
     <div css={footer}>
       <div css={footerCopyright}>Andrea Mikula © 2021 Copyright</div>
     </div>
-    // <nav>
-    //   <ul css={nav}>
-    //   <li>
-    //     <Link href="/">
-    //       <a>Foot</a>
-    //     </Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/tours-page">
-    //       <a>Foot</a>
-    //     </Link>
-    //   </li>
-    //   <li>
-    //     <Link href="/single-tour-page">
-    //       <a>Foot</a>
-    //     </Link>
-    //   </li>
-
-    // </ul>
-    //   </nav>
   );
 }
 
