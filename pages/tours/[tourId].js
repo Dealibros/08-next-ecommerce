@@ -65,19 +65,30 @@ const price = css`
 export default function Tour(props) {
   function addTours(e) {
     console.log(props.singleTour.id);
-    let toursSelected = Cookies.get('toursSelected');
+    let toursSelected = getParsedCookie('toursSelected');
 
-    // if (typeof toursSelected === 'undefined') {
-    toursSelected = [
-      {
+    if (typeof toursSelected === 'undefined') {
+      // No tours have been saved yet, we create array with selected tour
+      toursSelected = [
+        {
+          name: props.singleTour.name,
+          destination: props.singleTour.destination,
+          id: props.singleTour.id,
+          price: props.singleTour.price,
+        },
+      ];
+    } else {
+      // There are already tours saved in the cookies,
+      // we add the current one to the list
+      toursSelected = toursSelected.tours;
+      toursSelected.push({
         name: props.singleTour.name,
         destination: props.singleTour.destination,
         id: props.singleTour.id,
         price: props.singleTour.price,
-      },
-    ];
-    // }
-
+      });
+    }
+    console.log(toursSelected);
     Cookies.set('toursSelected', JSON.stringify({ tours: toursSelected }));
     console.log(Cookies.get('toursSelected'));
   }
@@ -118,6 +129,8 @@ export default function Tour(props) {
 
 export async function getServerSideProps(context) {
   const { tours } = await import('../../util/database');
+  //add getTours up next to tours
+  // await getTours();
 
   const idFromTour = context.query.tourId;
   console.log(idFromTour);

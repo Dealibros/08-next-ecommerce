@@ -145,16 +145,26 @@ const shoppingText = css`
   font-family: 'New Tegomin';
 `;
 
-function ShoppingCart() {
-  console.log(Cookies.get('toursSelected'));
+// function ShoppingCart() {
+//   console.log(Cookies.get('toursSelected'));
 
-  // let toursSelected = getParsedCookie('toursSelected');
-  // let toursSelected = Cookies.get('toursSelected');
-  // console.log(toursSelected);
-  // if (typeof toursSelected === 'undefined') {
-  //   toursSelected = [];
-  // } else {
-  //   toursSelected = toursSelected.tour;
+//   // let toursSelected = getParsedCookie('toursSelected');
+//   // let toursSelected = Cookies.get('toursSelected');
+//   // console.log(toursSelected);
+//   // if (typeof toursSelected === 'undefined') {
+//   //   toursSelected = [];
+//   // } else {
+//   //   toursSelected = toursSelected.tour;
+
+function ShoppingCart() {
+  let toursSelected = getParsedCookie('toursSelected');
+  if (typeof toursSelected === 'undefined') {
+    toursSelected = [];
+  } else {
+    toursSelected = toursSelected.tours;
+  }
+  const totalSum = toursSelected.reduce((accum, item) => accum + item.price, 0);
+  console.log(toursSelected);
 
   return (
     <div>
@@ -173,15 +183,22 @@ function ShoppingCart() {
             <p>Subtotal</p>
           </div>
         </div>
-        {/* <div className="zorro" css={elDiv}>
-            {toursSelected.map((tour) => {
-              return <div>{toursSelected}</div>;
-            })}
-          </div> */}
         <div css={mainContainer}>
+          <div>
+            {toursSelected.map((tour) => {
+              return (
+                <div key={tour}>
+                  {tour.name} -- {tour.destination} -- {tour.price}
+                </div>
+              );
+            })}
+          </div>
           <div css={totalContainer}>
             <div>
-              <span>{/* {totalSum} {' €'} */}</span>
+              <span>
+                {' '}
+                {totalSum} {' €'}
+              </span>
             </div>
           </div>
           <div>

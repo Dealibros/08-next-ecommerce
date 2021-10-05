@@ -72,32 +72,32 @@ function Contact() {
             <div>
               <form css={form}>
                 <h1 css={title}>Contact Form</h1>
-                <div class="form-row">
+                <div>
                   <div css={row}>
-                    <label for="name">Full Name</label>
+                    <label htmlFor="name">Full Name</label>
                     <br />
                     <input
-                      class="form-control"
+                      className="form-control"
                       id="name"
                       placeholder="Full name"
-                      formControlName="name"
+                      formcontrolname="name"
                     />
                   </div>
                   <div css={row}>
-                    <label for="inputEmail4">Email</label>
+                    <label htmlFor="inputEmail4">Email</label>
                     <br />
                     <input
                       type="email"
-                      class="form-control"
+                      className="form-control"
                       id="inputEmail4"
                       placeholder="Email"
-                      formControlName="email"
+                      formcontrolname="email"
                     />
                   </div>
                 </div>
 
                 <div css={row}>
-                  <label for="subject">Subject</label>
+                  <label htmlFor="subject">Subject</label>
                   <br />
                   <input
                     css={textarea}
