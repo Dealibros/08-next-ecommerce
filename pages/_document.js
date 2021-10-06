@@ -5,7 +5,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-        <link
+          <link
             href="https://fonts.googleapis.com/css2?family=Alef:wght@700&display=swap"
             rel="stylesheet"
           />
@@ -19,8 +19,8 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-export default MyDocument
+export default MyDocument;

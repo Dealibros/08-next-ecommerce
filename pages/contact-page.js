@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import Head from 'next/head';
 import Layout from '../components/Layout';
 

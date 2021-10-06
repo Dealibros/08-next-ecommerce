@@ -129,8 +129,6 @@ export default function Tour(props) {
 
 export async function getServerSideProps(context) {
   const { tours } = await import('../../util/database');
-  //add getTours up next to tours
-  // await getTours();
 
   const idFromTour = context.query.tourId;
   console.log(idFromTour);

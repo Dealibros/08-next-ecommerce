@@ -110,14 +110,15 @@ function Tours(props) {
 }
 
 export async function getServerSideProps(context) {
-  const { tours } = await import('../../util/database');
-  //add getTours next to tours
+  const { tours, getTours } = await import('../../util/database');
+
+  const tours2 = await getTours();
 
   // const tours2 = await getTours();
-  // console.log(tours2);
+  console.log(tours2);
 
-  const reqCookie = JSON.parse(context.req.cookies.toursSelected);
-  console.log(reqCookie);
+  // const reqCookie = JSON.parse(context.req.cookies.toursSelected);
+  // console.log(reqCookie);
 
   return {
     props: {

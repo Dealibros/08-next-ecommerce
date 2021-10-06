@@ -1,17 +1,16 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 
-function CheckOut(){
+function CheckOut() {
   return (
-  <div>
+    <div>
       <Layout>
-      <Head>
-    <title>Check Out Ecommerce</title>
-  </Head>
-      <h1>Shopping Cart here</h1>
+        <Head>
+          <title>Check Out Ecommerce</title>
+        </Head>
+        <h1>Shopping Cart here</h1>
       </Layout>
-
-  </div>
+    </div>
   );
 }
 

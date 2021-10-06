@@ -7,16 +7,17 @@ dotenvSafe.config();
 
 const sql = postgres();
 
-// export async function getTours() {
-//   const tours = await sql`
-//   SELECT * FROM tours;
-//   `;
-//   return tours.map((tour) => {
-//     return camelcaseKeys(tour);
-//   });
+export async function getTours() {
+  const tours = await sql`
+  SELECT * FROM tours;
+  `;
 
-//   console.log('tours', tours);
-// }
+  //   return tours.map((tour) => {
+  //     return camelcaseKeys(tour);
+  //   });
+
+  console.log('tours', tours);
+}
 
 export const tours = [
   {
