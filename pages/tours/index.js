@@ -2,10 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { userInfo } from 'os';
 import Layout from '../../components/Layout';
-
-// import { getTours } from '../../util/database';
 
 const background = css`
   background-color: rgba(145, 111, 111, 0.1);
@@ -85,7 +82,7 @@ function Tours(props) {
                       <a css={a}>
                         <div css={containerItem}>
                           <img
-                            src={tour.img}
+                            src={`/images/${tour.img}.jpg`}
                             alt="Logo"
                             width="350"
                             height="360"
@@ -110,13 +107,11 @@ function Tours(props) {
 }
 
 export async function getServerSideProps(context) {
-  const { tours, getTours } = await import('../../util/database');
+  const { getTours } = await import('../../util/database');
 
-  const tours2 = await getTours();
+  const tours = await getTours();
 
-  // const tours2 = await getTours();
-  console.log(tours2);
-
+  console.log(tours);
   // const reqCookie = JSON.parse(context.req.cookies.toursSelected);
   // console.log(reqCookie);
 

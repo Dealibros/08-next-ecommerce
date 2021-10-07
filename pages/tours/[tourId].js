@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Cookies from 'js-cookie';
 import Head from 'next/head';
 // import { useRouter } from 'next/router';
-import { useState } from 'react';
+// import { useState } from 'react';
 import Layout from '../../components/Layout';
 import { getParsedCookie, setParsedCookie } from '../../util/cookies';
 
@@ -64,17 +64,17 @@ const price = css`
 
 export default function Tour(props) {
   function addTours(e) {
-    console.log(props.singleTour.id);
+    console.log(props.tour.id);
     let toursSelected = getParsedCookie('toursSelected');
 
     if (typeof toursSelected === 'undefined') {
       // No tours have been saved yet, we create array with selected tour
       toursSelected = [
         {
-          name: props.singleTour.name,
-          destination: props.singleTour.destination,
-          id: props.singleTour.id,
-          price: props.singleTour.price,
+          name: props.tour.name,
+          destination: props.tour.destination,
+          id: props.tour.id,
+          price: props.tour.price,
         },
       ];
     } else {
@@ -82,10 +82,10 @@ export default function Tour(props) {
       // we add the current one to the list
       toursSelected = toursSelected.tours;
       toursSelected.push({
-        name: props.singleTour.name,
-        destination: props.singleTour.destination,
-        id: props.singleTour.id,
-        price: props.singleTour.price,
+        name: props.tour.name,
+        destination: props.tour.destination,
+        id: props.tour.id,
+        price: props.tour.price,
       });
     }
     console.log(toursSelected);
@@ -103,20 +103,20 @@ export default function Tour(props) {
           <div>
             <img
               css={image}
-              src={props.singleTour.img}
+              src={`/images/${props.tour.img}.jpg`}
               alt="Logo"
               width="470"
               height="480"
             />
           </div>
           <span css={text}>
-            <h1 css={title}>Tour"{props.singleTour.name}"</h1>
-            <h3 css={destination}>{props.singleTour.destination}</h3>
+            <h1 css={title}>Tour"{props.tour.name}"</h1>
+            <h3 css={destination}>{props.tour.destination}</h3>
 
-            <p css={description}>{props.singleTour.description} </p>
-            <h5>{props.singleTour.stDate}</h5>
-            <h5>{props.singleTour.duration}</h5>
-            <h4 css={price}>{props.singleTour.price}€</h4>
+            <p css={description}>{props.tour.description} </p>
+            <h5>{props.tour.stDate}</h5>
+            <h5>{props.tour.duration}</h5>
+            <h4 css={price}>{props.tour.price}€</h4>
             <button onClick={addTours}>Click</button>
           </span>
         </div>
@@ -128,18 +128,19 @@ export default function Tour(props) {
 // need to understand better
 
 export async function getServerSideProps(context) {
-  const { tours } = await import('../../util/database');
+  const { getTour } = await import('../../util/database');
 
-  const idFromTour = context.query.tourId;
-  console.log(idFromTour);
+  const tour = await getTour(context.query.tourId);
 
-  const singleTour = tours.find((tour) => {
-    return idFromTour === tour.id;
-  });
+  console.log(getTour);
+
+  // const singleTour = tours.find((tour) => {
+  //   return idFromTour === tour.id;
+  // });
 
   return {
     props: {
-      singleTour,
+      tour,
     },
   };
 }
