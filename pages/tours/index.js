@@ -76,15 +76,15 @@ function Tours(props) {
           <div css={container}>
             {props.tours.map((tour) => {
               return (
-                <div css={background} key={tour}>
-                  <div css={item} key={`tour-li-${tour.id}`}>
+                <div css={background} key={tour.id}>
+                  <div css={item}>
                     <Link href={`/tours/${tour.id}`}>
                       <a css={a}>
                         <div css={containerItem}>
                           <img
                             src={`/images/${tour.img}.jpg`}
                             alt="Logo"
-                            width="350"
+                            width="310"
                             height="360"
                           />
                           <div css={itemInfo}>

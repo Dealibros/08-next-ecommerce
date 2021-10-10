@@ -2,9 +2,14 @@ import { css } from '@emotion/react';
 import Cookies from 'js-cookie';
 import Head from 'next/head';
 // import { useRouter } from 'next/router';
-// import { useState } from 'react';
+import { useState } from 'react';
 import Layout from '../../components/Layout';
-import { getParsedCookie, setParsedCookie } from '../../util/cookies';
+import {
+  CreateCookieArray,
+  findTourAndIncrementAmountCount,
+  getParsedCookie,
+  setParsedCookie,
+} from '../../util/cookies';
 
 const title = css`
   text-align: center;
@@ -22,12 +27,6 @@ const imageDiv = css`
   height: 85vh;
   width: 60vw;
 `;
-
-// const imageDiv = css`
-//   display: block;
-//   margin-left: 0 auto !important;
-//   margin-right: 0 auto !important;
-//   text-align: center;
 
 const image = css`
   border-radius: 20rem;
@@ -52,45 +51,54 @@ const text = css`
   margin-left: 2rem;
 `;
 
-// const button = css`
-//   border-radius: 2rem;
-//   padding: 0.6rem;
-//   background-color: beige;
-// `;
-
 const price = css`
   font-size: 1rem;
 `;
 
 export default function Tour(props) {
-  function addTours(e) {
-    console.log(props.tour.id);
-    let toursSelected = getParsedCookie('toursSelected');
+  // UseState for idfromTourSelected
+  const [idfromTourSelected, setIdfromTourSelected] = useState(
+    getParsedCookie('idfromTourSelected') || [],
+  );
 
-    if (typeof toursSelected === 'undefined') {
-      // No tours have been saved yet, we create array with selected tour
-      toursSelected = [
-        {
-          name: props.tour.name,
-          destination: props.tour.destination,
-          id: props.tour.id,
-          price: props.tour.price,
-        },
-      ];
-    } else {
-      // There are already tours saved in the cookies,
-      // we add the current one to the list
-      toursSelected = toursSelected.tours;
-      toursSelected.push({
-        name: props.tour.name,
-        destination: props.tour.destination,
-        id: props.tour.id,
-        price: props.tour.price,
-      });
-    }
-    console.log(toursSelected);
-    Cookies.set('toursSelected', JSON.stringify({ tours: toursSelected }));
-    console.log(Cookies.get('toursSelected'));
+  // returns the value of the first element in the provided array that satisfies the provided testing function. If no there is no value returns undefined. cookieObject.id is the same as the tour id.
+
+  const tourCookieObject = idfromTourSelected.find(
+    (cookieObj) => cookieObj.id === props.tour.id,
+  );
+
+  // ----------------------------------------------------------------
+  // If the cookie is empty = 0, if not = amount
+  const initialAmount = tourCookieObject ? tourCookieObject.newAmount : 0;
+
+  // UseState for amount (items in Cart) //Takes the intial amount from up.
+  const [newAmount, setNewAmount] = useState(initialAmount);
+
+  // ----------------------------------------------------------------
+
+  function CreateCookie() {
+    const idfromTourSelectedArray = getParsedCookie('idfromTourSelected') || [];
+
+    // Take current cookie with Id and add the property amount
+    const idfromTourSelectedPlus = CreateCookieArray(
+      idfromTourSelectedArray,
+      props.tour.id,
+      () => setNewAmount(0),
+    );
+
+    setParsedCookie('idfromTourSelected', idfromTourSelectedPlus);
+
+    const currentCookie = getParsedCookie('idfromTourSelected') || [];
+
+    // 2. Get the object into the array
+    const updateTour = findTourAndIncrementAmountCount(
+      currentCookie,
+      props.tour.id,
+    );
+    console.log(currentCookie);
+    // 3. set the new version of the array
+    setParsedCookie('idfromTourSelected', currentCookie);
+    setNewAmount(updateTour.amount);
   }
 
   return (
@@ -117,7 +125,7 @@ export default function Tour(props) {
             <h5>{props.tour.stDate}</h5>
             <h5>{props.tour.duration}</h5>
             <h4 css={price}>{props.tour.price}€</h4>
-            <button onClick={addTours}>Click</button>
+            <button onClick={CreateCookie}>Add to Cart</button>
           </span>
         </div>
       </Layout>
@@ -131,8 +139,8 @@ export async function getServerSideProps(context) {
   const { getTour } = await import('../../util/database');
 
   const tour = await getTour(context.query.tourId);
-
-  console.log(getTour);
+  console.log(tour);
+  console.log(context.query.tourId);
 
   // const singleTour = tours.find((tour) => {
   //   return idFromTour === tour.id;

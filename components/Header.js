@@ -1,4 +1,6 @@
 import { css } from '@emotion/react';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import Link from 'next/link';
 import sunshine from '../public/sunshine.svg';
@@ -56,6 +58,7 @@ const navLi = css`
 
 const a = css`
   text-decoration: none;
+  color: white !important;
 
   :hover {
     color: #a5966d;
@@ -96,15 +99,19 @@ function Header() {
             <li css={navLi}>
               <Link href="/shopping-cart-page">
                 <a css={a}>
-                  <span role="img" aria-label="cart">
-                    🛒
+                  <FontAwesomeIcon size="1x" icon={faShoppingCart} />{' '}
+                  <span>
+                    {/* {props.tourshoppingCart
+                      .map((item) => item.quantity)
+                      .reduce((total, amount) => total + amount, 0)} */}
+                    0
                   </span>
                 </a>
               </Link>
               <Link href="/thank-you-page">
                 <a css={a}>
                   <span role="img" aria-label="cart">
-                    🛒
+                    *
                   </span>
                 </a>
               </Link>
