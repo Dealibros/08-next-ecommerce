@@ -11,7 +11,11 @@ import findTourAndIncrementAmountCount, {
   getParsedCookie,
   setParsedCookie,
 } from '../util/cookies';
-import { incrementTour } from '../util/PlusMinusInfoCookie';
+import {
+  decreaseTour,
+  incrementTour,
+  removeTour,
+} from '../util/PlusMinusInfoCookie';
 import { totalCartSum, toursTotalPrice } from '../util/totalCartSum';
 import Tours from './tours';
 
@@ -213,7 +217,6 @@ function AddtoShoppingCart(props) {
     newCookie = newCookie.id;
   }
   const [activeTours, setActiveTours] = useState(props.tours);
-  console.log(newCookie);
   return (
     <div>
       <Layout>
@@ -258,11 +261,13 @@ function AddtoShoppingCart(props) {
                         <button
                           css={button}
                           onClick={() => {
-                            incrementTour(tour.id);
-                            const currentPropTour = props.tours.find(
+                            decreaseTour(tour.id);
+                            const currentPropTour = activeTours.find(
                               (t) => t.id === tour.id,
                             );
-                            currentPropTour.amount -= 1;
+                            if (currentPropTour.amount > 0) {
+                              currentPropTour.amount -= 1;
+                            }
                             // setActiveTours(props.tours);
                             setActiveTours([...props.tours]);
                             console.log(props.tours);
@@ -286,14 +291,13 @@ function AddtoShoppingCart(props) {
                           css={button}
                           onClick={() => {
                             incrementTour(tour.id);
-                            const currentPropTour = props.tours.find(
+                            const currentPropTour = activeTours.find(
                               (t) => t.id === tour.id,
                             );
                             currentPropTour.amount += 1;
                             // setActiveTours(props.tours);
                             setActiveTours([...props.tours]);
                             console.log(props.tours);
-                            // check for refresh page
                           }}
                         >
                           <FontAwesomeIcon
@@ -309,49 +313,23 @@ function AddtoShoppingCart(props) {
                           // id={tour.id}
 
                           onClick={() => {
-                            incrementTour(tour.id);
-                            const currentPropTour = props.tours.find(
-                              (t) => t.id === tour.id,
-                            );
-                            currentPropTour.amount += 1;
-                            // setActiveTours(props.tours);
-                            setActiveTours([...props.tours]);
+                            removeTour(tour.id);
+                            console.log(tour.id);
+                            // The filter() method creates a new array with all elements that pass the test implemented by the provided function.
+                            const currentPropTour = activeTours.filter(
+                              (t) => t.id !== tour.id,
+                            ); // filters and takes the clicked element out of the list. currentPropTour is the deleted element now.
+                            console.log(currentPropTour);
+                            // if (currentPropTour) {
+                            //   currentPropTour.splice(currentPropTour, 1);
+                            // } else {
+                            //   return setActiveTours([props.tours]);
+                            // }
+                            setActiveTours([...currentPropTour]);
+                            console.log(currentPropTour);
+
                             console.log(props.tours);
-                            // check for refresh page
                           }}
-                          // onClick={(e) => {
-                          //   console.log('DELETE');
-                          // Cookies.remove;
-                          // setTourCart(deleteTour(tour.id));
-                          // onClick={() => {
-                          //   const arr = setParsedCookie(tour);
-                          // console.log(arr);
-                          // console.log(tour);
-                          // const deleting = tour.some((id) => {
-                          //   return id === Number(tour.id);
-                          // });
-                          // const tourie = getParsedCookie('tour');
-                          // console.log(tourie);
-                          // tour.splice(0, 1);
-                          // props.setShoppingCart(removeProductById(item.id));
-                          // setFinalShoppingCartArray(
-                          //   finalShoppingCartArray.filter(
-                          //     (product) => product.id !== item.id,
-                          //   ),
-                          // );
-                          // }}
-                          //                         export function removeProductById(productId) {
-                          // const newCookieValue = [...getShoppingCartCookieValue()];
-                          // const productIdInCookie = newCookieValue.find((p) => p.id === productId);
-
-                          // if (productIdInCookie) {
-                          //   newCookieValue.splice(productIdInCookie, 1);
-                          // } else {
-                          //   return newCookieValue;
-                          // }
-
-                          // cookies.set('quantity', newCookieValue);
-                          // return newCookieValue;
                         >
                           <FontAwesomeIcon
                             size="sm"
@@ -400,7 +378,6 @@ export async function getServerSideProps(context) {
   // console.log(cookies);
 
   // to put together the right database and cookie through the id
-  // to put together the right database and cookie through the id
   // some will return true(a bolean) as soon as one value fits the written condition.
   //   // After the first truthy condition it will stop running.
 
@@ -412,24 +389,6 @@ export async function getServerSideProps(context) {
     const tourObj = idfromTourSelected.find((cookieObj) => {
       return cookieObj.id === Number(tour.id);
     });
-
-    // console.log(tourObj);
-    // console.log(idfromTourSelected);
-    // const removeFalsy = idfromTourSelected.filter((values) => {
-    //   return ((value)  !!value);
-    // });
-
-    // const removeFalsy = idfromTourSelected.filter((idfromTourSelected)  => Boolean(true))  {
-    //   return
-    // }
-    // console.log(removeFalsy);
-    // const trueInCart = idfromTourSelected.find((cookieObj) => {
-    //   return cookieObj.idfromTourSelected === 'true';
-    // });
-
-    // const trueInCart = idfromTourSelected.filter((idfromTourSelected === "true") => {
-    //   return trueInCart;
-    // });
 
     return {
       ...tour,
@@ -456,9 +415,3 @@ export async function getServerSideProps(context) {
   };
 }
 export default AddtoShoppingCart;
-
-//     // const trueInCart = idfromTourSelected.filter((idfromTourSelected === "true") => {
-//     //   return trueInCart;
-//     // });
-//     // if (isIdTourSelected === true) {
-//     //   console.log(idfromTourSelected);

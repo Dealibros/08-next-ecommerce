@@ -72,7 +72,7 @@ const sunshineLogo = css`
   padding-left: 2rem;
 `;
 
-function Header() {
+export function Header(props) {
   return (
     <div css={navContainer}>
       <nav>
@@ -101,10 +101,10 @@ function Header() {
                 <a css={a}>
                   <FontAwesomeIcon size="1x" icon={faShoppingCart} />{' '}
                   <span>
-                    {/* {props.tourshoppingCart
-                      .map((item) => item.quantity)
-                      .reduce((total, amount) => total + amount, 0)} */}
-                    0
+                    {/* {props.tours
+                      .map((obj) => obj.amount)
+                      .reduce((total, amount) => total + amount, 0)}
+                    0 */}
                   </span>
                 </a>
               </Link>
