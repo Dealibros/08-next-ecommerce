@@ -198,11 +198,11 @@ const amount = css`
   text-align: center;
 `;
 
-const shoppingText = css`
-  font-family: 'New Tegomin';
-  text-align: right;
-  margin-right: 0;
-`;
+// const shoppingText = css`
+//   font-family: 'New Tegomin';
+//   text-align: right;
+//   margin-right: 0;
+// `;
 
 const tourPrice = css`
   text-align: center;
@@ -219,7 +219,7 @@ function AddtoShoppingCart(props) {
   const [activeTours, setActiveTours] = useState(props.tours);
   return (
     <div>
-      <Layout>
+      <Layout cartCount={props.cartCount} setCartCount={props.setCartCount}>
         <Head>
           <title>Shopping Cart Ecommerce</title>
         </Head>
@@ -342,7 +342,10 @@ function AddtoShoppingCart(props) {
                       </div>
                     </div>
                     <div css={tourPrice}>
-                      <h4>{toursTotalPrice(tour.amount, tour.price)}</h4>
+                      <h4>
+                        {toursTotalPrice(tour.amount, tour.price)}
+                        {' €'}
+                      </h4>
                     </div>
                   </div>
                 );

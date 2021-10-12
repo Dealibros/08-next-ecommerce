@@ -66,9 +66,11 @@ const a = css`
 `;
 
 function Tours(props) {
+  console.log(props.cartCount);
+
   return (
     <div>
-      <Layout>
+      <Layout cartCount={props.cartCount} setCartCount={props.setCartCount}>
         <Head>
           <title>Tours Ecommerce</title>
         </Head>

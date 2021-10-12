@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Cookies from 'js-cookie';
 import Head from 'next/head';
 // import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import {
   CreateCookieArray,
@@ -61,6 +61,10 @@ export default function Tour(props) {
     getParsedCookie('idfromTourSelected') || [],
   );
 
+  // useEffect(() => {
+  //   Cookies.set('cart', props.cart, { expires: 1 });
+  // }, [props.cart]);
+  // console.log(props.cart);
   // returns the value of the first element in the provided array that satisfies the provided testing function. If no there is no value returns undefined. cookieObject.id is the same as the tour id.
 
   const tourCookieObject = idfromTourSelected.find(
@@ -73,7 +77,7 @@ export default function Tour(props) {
 
   // UseState for amount (items in Cart) //Takes the intial amount from up.
   const [newAmount, setNewAmount] = useState(initialAmount);
-
+  console.log(props.newAmount);
   // ----------------------------------------------------------------
 
   function CreateCookie() {
@@ -95,15 +99,19 @@ export default function Tour(props) {
       currentCookie,
       props.tour.id,
     );
-    console.log(currentCookie);
+
     // 3. set the new version of the array
     setParsedCookie('idfromTourSelected', currentCookie);
     setNewAmount(updateTour.amount);
-  }
 
+    console.log(newAmount);
+    // setCartCount(currentCookie.amount);
+  }
+  console.log(props.cartCount);
+  console.log(idfromTourSelected);
   return (
     <div>
-      <Layout>
+      <Layout cartCount={props.cartCount} setCartCount={props.setCartCount}>
         <Head>
           <title>Tour Ecommerce</title>
         </Head>
@@ -120,19 +128,24 @@ export default function Tour(props) {
           <span css={text}>
             <h1 css={title}>Tour"{props.tour.name}"</h1>
             <h3 css={destination}>{props.tour.destination}</h3>
-
             <p css={description}>{props.tour.description} </p>
             <h5>{props.tour.stDate}</h5>
             <h5>{props.tour.duration}</h5>
             <h4 css={price}>{props.tour.price}€</h4>
-            <button onClick={CreateCookie}>Add to Cart</button>
+            <button
+              onClick={CreateCookie}
+              // onClick={() => {
+              //   setCartCount(CreateCookie);
+              // }}
+            >
+              Add to Cart
+            </button>
           </span>
         </div>
       </Layout>
     </div>
   );
 }
-
 // need to understand better
 
 export async function getServerSideProps(context) {

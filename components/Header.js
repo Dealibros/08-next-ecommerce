@@ -73,6 +73,7 @@ const sunshineLogo = css`
 `;
 
 export function Header(props) {
+  console.log(props.cartCount);
   return (
     <div css={navContainer}>
       <nav>
@@ -100,18 +101,20 @@ export function Header(props) {
               <Link href="/shopping-cart-page">
                 <a css={a}>
                   <FontAwesomeIcon size="1x" icon={faShoppingCart} />{' '}
-                  <span>
-                    {/* {props.tours
-                      .map((obj) => obj.amount)
-                      .reduce((total, amount) => total + amount, 0)}
-                    0 */}
-                  </span>
+                  <span>{props.cartCount}</span>
                 </a>
               </Link>
               <Link href="/thank-you-page">
                 <a css={a}>
                   <span role="img" aria-label="cart">
                     *
+                  </span>
+                </a>
+              </Link>
+              <Link href="/check-out-page">
+                <a css={a}>
+                  <span role="img" aria-label="cart">
+                    +
                   </span>
                 </a>
               </Link>

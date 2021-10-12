@@ -58,11 +58,11 @@ const button = css`
   color: white;
 `;
 
-function Contact() {
+function Contact(props) {
   return (
     <div>
       <div>
-        <Layout>
+        <Layout cartCount={props.cartCount} setCartCount={props.setCartCount}>
           <Head>
             <title>About Ecommerce </title>
           </Head>

@@ -33,7 +33,7 @@ const title = css`
 //   width: 10rem;
 // `;
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div>
       <Head>
@@ -42,7 +42,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
-      <Layout>
+      <Layout cartCount={props.cartCount} setCartCount={props.setCartCount}>
         <main css={main}>
           {/* <Image css={portadaStyle} src={portada} alt="portada" /> */}
           <p css={title}>Travel the World</p>
