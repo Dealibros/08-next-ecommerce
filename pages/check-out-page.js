@@ -20,11 +20,9 @@ const container = css`
 const leftContainer = css`
   margin-left: 5rem;
   width: 60%;
-  color: #182b4f;
   font-size: 1.1em;
   font-weight: bold;
   input {
-    color: #182b4f;
     font-size: 1.3em;
     border-radius: 0.4rem;
   }
@@ -96,17 +94,14 @@ const button = css`
   border-radius: 0.4rem;
 
   :hover {
-    background: #182b4f;
-    color: #f39200;
+    color: gray;
   }
   :active {
-    background: #182b4f;
-    color: #f39200;
+    color: gray;
     border: none;
   }
   :focus {
-    background: #182b4f;
-    color: #f39200;
+    color: yellow;
     border: none;
   }
 `;
