@@ -407,10 +407,6 @@ export async function getServerSideProps(context) {
 
   // console.log(theCookie); // shows all the tours
 
-  // console.log(idfromTourSelected);
-  // const reqCookie = JSON.parse(context.req.cookies.toursSelected);
-  // console.log(theCookie);
-
   return {
     props: {
       tours: trueCookie,

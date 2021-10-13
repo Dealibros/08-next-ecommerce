@@ -32,7 +32,6 @@ export function removeTour(tourId) {
 
   // The find() method returns the value of the first element in the provided array that satisfies the provided testing function
   const tourFromCookie = cartTours.find((p) => p.id === tourId); // grabs the tour to delete in which we clicked
-  console.log(tourFromCookie);
   if (tourFromCookie) {
     const deleting = cartTours.splice(tourFromCookie, 1); //instead of 0
     console.log(cartTours);

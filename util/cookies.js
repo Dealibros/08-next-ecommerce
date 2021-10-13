@@ -30,18 +30,18 @@ export function findTourAndIncrementAmountCount(tours, tourId) {
   return tourFromCookie;
 }
 
-export function CreateCookieArray(idfromTourSelectedArray, tourId) {
-  // The some() method tests whether at least one element in the array passes the test implemented by the provided function. Returns true or Flase (Boolean).
-  const isTourIdSelected = idfromTourSelectedArray.some((cookieObject) => {
+export function CreateCookieArray(idfromTourSelected, tourId) {
+  // The some() method tests whether at least one element in the array passes the test implemented by the provided function. Returns true or False (Boolean).
+  const isTourIdSelected = idfromTourSelected.some((cookieObject) => {
     return cookieObject.id === tourId;
   });
 
   if (isTourIdSelected) {
-    idfromTourSelectedArray.amount += 1;
-    return idfromTourSelectedArray;
+    idfromTourSelected.amount += 1;
+    return idfromTourSelected;
   } else {
     const idfromTourSelectedPlus = [
-      ...idfromTourSelectedArray,
+      ...idfromTourSelected,
       { id: tourId, amount: 0 },
     ];
     return idfromTourSelectedPlus;

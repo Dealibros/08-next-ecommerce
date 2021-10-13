@@ -62,6 +62,9 @@ const lastSubContainerRight = css`
   }
 `;
 
+const extendInput = css`
+  width: 85%;
+`;
 const sum = css`
   font-weight: bold;
 `;
@@ -131,7 +134,7 @@ export default function Checkout(props) {
             </div>
             <form>
               <form>Email adress</form>
-              <input id autocomplete="name" required />
+              <input css={extendInput} id autocomplete="name" required />
               <form type="email" placeholder="Dea@dea.com" />
             </form>
             <div css={inputContainer}>
@@ -148,7 +151,7 @@ export default function Checkout(props) {
             </div>
             <form>
               <form>Country</form>
-              <input id autocomplete="name" required />
+              <input css={extendInput} id autocomplete="name" required />
               <form placeholder="Austria" />
             </form>
           </div>
@@ -157,11 +160,11 @@ export default function Checkout(props) {
             <form>
               <form>Name on Credit Card</form>
               <form placeholder="Dea Mik" />
-              <input id autocomplete="name" required />
+              <input css={extendInput} id autocomplete="name" required />
             </form>
             <form>
               <form type="number">Card Number</form>
-              <input id autocomplete="name" required />
+              <input css={extendInput} id autocomplete="name" required />
               <form placeholder="533344455556666" />
             </form>
             <div css={inputContainer}>

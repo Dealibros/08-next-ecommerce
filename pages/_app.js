@@ -18,19 +18,14 @@ function MyApp({ Component, pageProps }) {
 
   async function getAllCookies() {
     const currentCookies = (await getParsedCookie('idfromTourSelected')) || [];
-    console.log(currentCookies);
+    // setCartCount(currentCookies);
     setCartCount(currentCookies.reduce((sum, obj) => sum + obj['amount'], 0));
   }
   console.log(cartCount);
-  // setCartCount(total);
 
   useEffect(() => {
     getAllCookies();
   }, [cartCount]);
-
-  // useEffect(() => {
-  //   setCartCount(getAllCookies());
-  // }, []);
 
   console.log(cartCount);
 
