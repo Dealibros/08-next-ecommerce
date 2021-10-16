@@ -1,11 +1,8 @@
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { css, Global } from '@emotion/react';
-import { config } from '@fortawesome/fontawesome-svg-core';
-import cookie from 'js-cookie';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
-import { getParsedCookie, setParsedCookie } from '../util/cookies';
+import { getParsedCookie } from '../util/cookies';
 
 // config.autoAddCss = false;
 
@@ -18,6 +15,7 @@ function MyApp({ Component, pageProps }) {
 
   async function getAllCookies() {
     const currentCookies = (await getParsedCookie('idfromTourSelected')) || [];
+    console.log(currentCookies);
     // setCartCount(currentCookies);
     setCartCount(currentCookies.reduce((sum, obj) => sum + obj['amount'], 0));
   }
@@ -56,7 +54,7 @@ function MyApp({ Component, pageProps }) {
       <Component
         {...pageProps}
         cartCount={cartCount}
-        setcartCount={setCartCount}
+        setCartCount={setCartCount}
       />
     </>
   );

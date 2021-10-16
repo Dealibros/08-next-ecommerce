@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
-import Cookies from 'js-cookie';
 import Head from 'next/head';
-// import { useRouter } from 'next/router';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import {
   CreateCookieArray,
@@ -64,10 +62,12 @@ export default function Tour(props) {
 
   // Finds search for the first element in the provided array that satisfies the provided testing function.In this case the same ID.
   // props.tour.Id = Id from Cookie from the Database.
+  console.log(idfromTourSelected);
+  // const cookieWithSame = Object.keys(idfromTourSelected);
   const cookieWithSameId = idfromTourSelected.find(
     (cookieObj) => cookieObj.id === props.tour.id,
   );
-
+  console.log(cookieWithSameId);
   // -------------------------------------------------------
   // If the cookie is empty = 0, if not = amount
 
@@ -75,12 +75,13 @@ export default function Tour(props) {
 
   // UseState for amount (items in Cart) //Takes the intial amount from up.
 
-  let [newAmount, setNewAmount] = useState(props.cartCount);
+  const [newAmount, setNewAmount] = useState(initialAmount);
 
   // ----------------------------------------------------------------
 
   function CreateCookie() {
     const idfromTourSelectedArray = getParsedCookie('idfromTourSelected') || [];
+    window.location.reload();
 
     // Creates a new cookie with the values added from the other cookie, amount and Id
     const idfromTourSelectedPlus = CreateCookieArray(
@@ -90,6 +91,7 @@ export default function Tour(props) {
     );
 
     setParsedCookie('idfromTourSelected', idfromTourSelectedPlus);
+    setIdfromTourSelected(idfromTourSelectedPlus);
 
     const currentCookie = getParsedCookie('idfromTourSelected') || [];
 
@@ -98,19 +100,24 @@ export default function Tour(props) {
       currentCookie,
       props.tour.id,
     );
-    console.log(updateTour); //adds the id and amount
+    console.log(updateTour); // adds the id and amount
 
     // 3. set the new version of the array
     setParsedCookie('idfromTourSelected', currentCookie);
-    console.log(currentCookie); //shows all tours with only amount and id
-    console.log(props.cartCount); //shows the sum of all amounts. (what we want to display)
+    console.log(currentCookie); // shows all tours with only amount and id
+    setNewAmount(updateTour.newAmount);
+    console.log(props.cartCount); // shows the sum of all amounts. (what we want to display)
 
     console.log(newAmount);
-    // props.setCartCount =
-    // idfromTourSelected.reduce((sum, obj) => sum + obj['amount'], 0),
     console.log(props.cartCount);
+    // props.setCartCount = idfromTourSelected.reduce(
+    //   (sum, obj) => sum + obj['amount'],
+    //   0,
+    // );
+    console.log(props.CartCount);
     // setCartCount(currentCookie.amount);
   }
+
   return (
     <div>
       <Layout cartCount={props.cartCount} setCartCount={props.setCartCount}>
@@ -146,8 +153,8 @@ export async function getServerSideProps(context) {
   const { getTour } = await import('../../util/database');
 
   const tour = await getTour(context.query.tourId);
-  console.log(tour);
-  console.log(context.query.tourId);
+  // console.log(tour);
+  // console.log(context.query.tourId);
 
   // const singleTour = tours.find((tour) => {
   //   return idFromTour === tour.id;

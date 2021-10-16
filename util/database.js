@@ -39,9 +39,7 @@ export async function getTours() {
   SELECT * FROM tours;
   `;
 
-  return tours.map((tour) => {
-    return camelcaseKeys(tour);
-  });
+  return tours.map((tour) => camelcaseKeys(tour));
 }
 
 export async function getTour(id) {

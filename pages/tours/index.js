@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import Layout from '../../components/Layout';
 
@@ -21,7 +21,6 @@ const containerItem = css`
   border-radius: 7px 7px 0 0;
   margin: -10px 20px 40px 0;
   margin-bottom: 9rem;
-
   img {
     border-radius: 20px 20px 0px 0px;
     margin-bottom: -20px;
@@ -33,7 +32,6 @@ const item = css`
   transition: 0.3s;
   transition-timing-function: ease-out;
   margin-bottom: 2rem;
-
   :hover {
     border-radius: 10px;
     box-shadow: 0px 0px 70px 8px rgba(0, 0, 0, 0.04);
@@ -66,7 +64,7 @@ const a = css`
 `;
 
 function Tours(props) {
-  console.log(props.cartCount);
+  // console.log(props.cartCount);
 
   return (
     <div>
@@ -108,12 +106,12 @@ function Tours(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const { getTours } = await import('../../util/database');
 
   const tours = await getTours();
 
-  console.log(tours);
+  // console.log(tours);
   // const reqCookie = JSON.parse(context.req.cookies.toursSelected);
   // console.log(reqCookie);
 

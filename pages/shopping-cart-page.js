@@ -1,23 +1,16 @@
 import { css } from '@emotion/react';
 import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Cookies from 'js-cookie';
-import { isDynamicRoute } from 'next/dist/shared/lib/router/utils';
 import Head from 'next/head';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/Layout';
-import findTourAndIncrementAmountCount, {
-  getParsedCookie,
-  setParsedCookie,
-} from '../util/cookies';
+import { getParsedCookie } from '../util/cookies';
 import {
   decreaseTour,
   incrementTour,
   removeTour,
 } from '../util/PlusMinusInfoCookie';
 import { totalCartSum, toursTotalPrice } from '../util/totalCartSum';
-import Tours from './tours';
 
 const main = css`
   margin-left: auto;
@@ -90,7 +83,7 @@ const noItemsContainer = css`
   font-weight: bold;
   font-size: 1.2em;
   margin-bottom: 5em;
-  text_align: right;
+  text-align: right;
 `;
 
 const container = css`
@@ -106,9 +99,9 @@ const container = css`
   }
 `;
 
-const subContainer = css`
-  width: 100%;
-`;
+// const subContainer = css`
+//   width: 100%;
+// `;
 
 const buttonsContainer = css`
   display: flex;
@@ -123,12 +116,12 @@ const buttonspan = css`
   display: none;
 `;
 
-const subTotal = css`
-  width: 70%;
-  display: flex;
-  justify-content: center;
-  font-size: 1.3em;
-`;
+// const subTotal = css`
+//   width: 70%;
+//   display: flex;
+//   justify-content: center;
+//   font-size: 1.3em;
+// `;
 
 const totalContainer = css`
   display: flex;
@@ -270,8 +263,8 @@ function AddtoShoppingCart(props) {
                             }
                             // setActiveTours(props.tours);
                             setActiveTours([...props.tours]);
-                            console.log(props.tours);
-                            // check for refresh page
+                            // console.log(props.tours);
+                            window.location.reload();
                           }}
                         >
                           <FontAwesomeIcon
@@ -295,9 +288,8 @@ function AddtoShoppingCart(props) {
                               (t) => t.id === tour.id,
                             );
                             currentPropTour.amount += 1;
-                            // setActiveTours(props.tours);
                             setActiveTours([...props.tours]);
-                            console.log(props.tours);
+                            window.location.reload();
                           }}
                         >
                           <FontAwesomeIcon
@@ -327,7 +319,7 @@ function AddtoShoppingCart(props) {
                             // }
                             setActiveTours([...currentPropTour]);
                             console.log(currentPropTour);
-
+                            window.location.reload();
                             console.log(props.tours);
                           }}
                         >
@@ -403,7 +395,7 @@ export async function getServerSideProps(context) {
   const trueCookie = theCookie.filter((cookieObject) => {
     return cookieObject.idfromTourSelected === true;
   });
-  console.log(trueCookie);
+  // console.log(trueCookie);
 
   // console.log(theCookie); // shows all the tours
 

@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import image from 'next/image';
 import Layout from '../components/Layout';
-import { totalCartSum } from '../util/totalCartSum';
+import { getTourintoCheckOut } from '../util/database';
+import { totalCartSum, toursTotalPrice } from '../util/totalCartSum';
+import Home from './';
 
 const container = css`
   font-family: 'New Tegomin';
@@ -18,7 +21,7 @@ const container = css`
 `;
 
 const leftContainer = css`
-  margin-left: 5rem;
+  margin-left: 8rem;
   width: 60%;
   font-size: 1.1em;
   font-weight: bold;
@@ -30,10 +33,10 @@ const leftContainer = css`
 
 const rightContainer = css`
   width: 40%;
-  margin: 30px 30px 30px 3rem;
+  margin: 50px 30px 30px 3rem;
   padding-top: 1.5rem;
   > div {
-    padding: 20px;
+    padding: 60px;
     background: rgb(190, 199, 143);
     border: 2px solid black;
     border-radius: 0.5rem;
@@ -47,14 +50,14 @@ const rightContainer = css`
 `;
 
 const lastSubContainerLeft = css`
-  width: 100%;
+  width: 50%;
   div {
     margin-bottom: 20px;
   }
 `;
 
 const lastSubContainerRight = css`
-  width: 100%;
+  width: 70%;
 
   div {
     border-radius: 0.6rem;
@@ -63,7 +66,7 @@ const lastSubContainerRight = css`
 `;
 
 const extendInput = css`
-  width: 85%;
+  width: 71%;
 `;
 const sum = css`
   font-weight: bold;
@@ -75,8 +78,7 @@ const inputContainer = css`
 `;
 
 const subContainerLeft = css`
-  width: 50%;
-  margin-right: 15px;
+  margin-right: 1rem;
 `;
 
 const subContainer = css`
@@ -109,15 +111,19 @@ const button = css`
   }
 `;
 
-export default function Checkout(props) {
+function Checkout(props) {
   return (
-    <Layout>
+    <Layout
+      Layout
+      cartCount={props.cartCount}
+      setCartCount={props.setCartCount}
+    >
       <Head>
         <title>Payment</title>
       </Head>
 
       <div css={container}>
-        <form css={leftContainer}>
+        {/* <form css={leftContainer}>
           <div>
             <h4>Personal Details</h4>
             <div css={inputContainer}>
@@ -186,12 +192,16 @@ export default function Checkout(props) {
           >
             Submit
           </button>
-        </form>
+        </form> */}
         <div css={rightContainer}>
           <div>
             <div css={lastSubContainerLeft}>
               <div>
-                <p>Total Amount:</p>
+                <p>
+                  {/* Total Amount: {console.log(props.tour)}
+                  {toursTotalPrice(props.tour.amount, props.tour.price)}
+                  {' €'} */}
+                </p>
                 <p>Price Subtotal:</p>
                 <p>Shipping Fee:</p>
               </div>
@@ -207,49 +217,48 @@ export default function Checkout(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const { getTourintoCart } = await import('../util/database');
+export default Checkout;
 
-  const tours = await getTourintoCart();
+export function getServerSideProps(context) {
+  const tourId = context.query.tourId;
+  // console.log(getTourintoCart());
+  const { getTour } = import('../util/database');
 
-  const cookies = context.req.cookies.idfromTourSelected || '[]';
-  const idfromTourSelected = JSON.parse(cookies);
+  const tourCart = getTour(tourId);
+  // const cookies = context.req.cookies.idfromTourSelected || '[]';
+  // const idfromTourSelected = JSON.parse(cookies);
   // console.log(cookies);
 
   // to put together the right database and cookie through the id
   // some will return true(a bolean) as soon as one value fits the written condition.
   //   // After the first truthy condition it will stop running.
 
-  const theCookie = tours.map((tour) => {
-    const isIdTourSelected = idfromTourSelected.some((tourCookieObj) => {
-      return Number(tour.id) === tourCookieObj.id;
-    });
-    // similar to some, find will return the first truthy value it finds. (only one)
-    const tourObj = idfromTourSelected.find((cookieObj) => {
-      return cookieObj.id === Number(tour.id);
-    });
+  // const theCookie = tours.map((tour) => {
+  //   const isIdTourSelected = idfromTourSelected.some((tourCookieObj) => {
+  //     return Number(tour.id) === tourCookieObj.id;
+  //   });
+  //   // similar to some, find will return the first truthy value it finds. (only one)
+  //   const tourObj = idfromTourSelected.find((cookieObj) => {
+  //     return cookieObj.id === Number(tour.id);
+  //   });
 
-    return {
-      ...tour,
-      idfromTourSelected: isIdTourSelected,
-      amount: isIdTourSelected ? tourObj.amount : 0,
-    };
-  });
+  //   return {
+  //     ...tour,
+  //     idfromTourSelected: isIdTourSelected,
+  //     amount: isIdTourSelected ? tourObj.amount : 0,
+  //   };
+  // });
 
-  const trueCookie = theCookie.filter((cookieObject) => {
-    return cookieObject.idfromTourSelected === true;
-  });
-  console.log(trueCookie);
+  // const trueCookie = theCookie.filter((cookieObject) => {
+  //   return cookieObject.idfromTourSelected === true;
+  // });
+  // console.log(trueCookie);
 
   // console.log(theCookie); // shows all the tours
 
-  // console.log(idfromTourSelected);
-  // const reqCookie = JSON.parse(context.req.cookies.toursSelected);
-  // console.log(theCookie);
-
   return {
     props: {
-      tours: trueCookie,
+      tourCart: tourCart,
     },
   };
 }
