@@ -210,7 +210,7 @@ function Checkout(props) {
 
 export default Checkout;
 
-export function getServerSideProps(context) {
+export function getServerSideProps() {
   // const tourId = context.query.tourId;
   // // console.log(getTourintoCart());
   // const { getTour } = import('../util/database');
