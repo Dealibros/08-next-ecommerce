@@ -2,8 +2,14 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "UpLeveled Node + React TSConfig",
   "compilerOptions": {
-    "types": ["@emotion/react/types/css-prop"],
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": [
+      "@emotion/react/types/css-prop"
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "target": "es2015",
     "moduleResolution": "node",
@@ -14,11 +20,12 @@
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "incremental": true
   },
   "include": [
     ".eslintrc.cjs",
@@ -29,5 +36,8 @@
     "**/*.cjs",
     "**/*.mjs"
   ],
-  "exclude": ["node_modules", "build"]
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
 }
