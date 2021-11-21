@@ -1,13 +1,6 @@
-// import '../styles/style.css';
 import { css } from '@emotion/react';
 import Head from 'next/head';
-// import Image from 'next/image';
-// import Link from 'next/link';
 import Layout from '../components/Layout';
-
-// import portada from '../public/images/portada.jpg';
-
-// import { myGlobalStyles } from '../styles/myGlobalStyles';
 
 const main = css`
   margin-top: 0;
@@ -69,12 +62,11 @@ export default function Home() {
 
       <Layout>
         <main css={main}>
-          {/* <Image css={portadaStyle} src={portada} alt="portada" /> */}
           <p css={title}>Travel the World</p>
           <img
             className="headerImage"
             src="/images/air-balloon.png"
-            alt="Header-image"
+            alt="Header"
             css={headerImage}
           />
         </main>

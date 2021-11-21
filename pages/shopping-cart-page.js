@@ -100,29 +100,17 @@ const container = css`
   }
 `;
 
-// const subContainer = css`
-//   width: 100%;
-// `;
-
 const buttonsContainer = css`
   display: flex;
   justify-content: center;
   width: 100%;
   align-items: center;
   border-radius: 1rem;
-  /* font-size: 1.3em; */
 `;
 
 const buttonspan = css`
   display: none;
 `;
-
-// const subTotal = css`
-//   width: 70%;
-//   display: flex;
-//   justify-content: center;
-//   font-size: 1.3em;
-// `;
 
 const totalContainer = css`
   display: flex;
@@ -191,12 +179,6 @@ const buttondelete = css`
 const amount = css`
   text-align: center;
 `;
-
-// const shoppingText = css`
-//   font-family: 'New Tegomin';
-//   text-align: right;
-//   margin-right: 0;
-// `;
 
 const tourPrice = css`
   text-align: center;
@@ -303,8 +285,6 @@ function AddtoShoppingCart(props) {
                         </button>
                         <button
                           css={buttondelete}
-                          // id={tour.id}
-
                           onClick={() => {
                             removeTour(tour.id);
                             console.log(tour.id);
@@ -313,11 +293,6 @@ function AddtoShoppingCart(props) {
                               (t) => t.id !== tour.id,
                             ); // filters and takes the clicked element out of the list. currentPropTour is the deleted element now.
                             console.log(currentPropTour);
-                            // if (currentPropTour) {
-                            //   currentPropTour.splice(currentPropTour, 1);
-                            // } else {
-                            //   return setActiveTours([props.tours]);
-                            // }
                             setActiveTours([...currentPropTour]);
                             console.log(currentPropTour);
                             window.location.reload();
@@ -358,7 +333,7 @@ function AddtoShoppingCart(props) {
               <div>
                 <Link href="/check-out-page">
                   <a>
-                    <button css={button}>Checkout</button>
+                    <button css={buttonCheckout}>Checkout</button>
                   </a>
                 </Link>
               </div>
@@ -377,7 +352,6 @@ export async function getServerSideProps(context) {
 
   const cookies = context.req.cookies.idfromTourSelected || '[]';
   const idfromTourSelected = JSON.parse(cookies);
-  // console.log(cookies);
 
   // to put together the right database and cookie through the id
   // some will return true(a bolean) as soon as one value fits the written condition.
@@ -402,9 +376,6 @@ export async function getServerSideProps(context) {
   const trueCookie = theCookie.filter((cookieObject) => {
     return cookieObject.idfromTourSelected === true;
   });
-  // console.log(trueCookie);
-
-  // console.log(theCookie); // shows all the tours
 
   return {
     props: {

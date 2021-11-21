@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-import image from 'next/image';
 import Layout from '../components/Layout';
-import Home from './';
 
 const container = css`
   font-family: 'New Tegomin';
@@ -184,12 +182,7 @@ function Checkout(props) {
               </form>
             </div>
           </div>
-          <button
-            css={button}
-            // onClick={}
-          >
-            Submit
-          </button>
+          <button css={button}>Submit</button>
         </form>
         <div css={rightContainer}>
           <div>
