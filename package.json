@@ -67,5 +67,10 @@
     "fs": false,
     "path": false,
     "os": false
+  },
+  "engines": {
+    "npm": "7.20.0",
+    "node": "16.7.0",
+    "yarn": "1.22.5"
   }
 }
