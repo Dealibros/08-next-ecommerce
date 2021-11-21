@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "UpLeveled Node + React TSConfig",
   "compilerOptions": {
+    "types": ["@emotion/react/types/css-prop"],
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "target": "es2015",
