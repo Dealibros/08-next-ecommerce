@@ -2,8 +2,6 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import image from 'next/image';
 import Layout from '../components/Layout';
-import { getTourintoCheckOut } from '../util/database';
-import { totalCartSum, toursTotalPrice } from '../util/totalCartSum';
 import Home from './';
 
 const container = css`
@@ -123,7 +121,7 @@ function Checkout(props) {
       </Head>
 
       <div css={container}>
-        {/* <form css={leftContainer}>
+        <form css={leftContainer}>
           <div>
             <h4>Personal Details</h4>
             <div css={inputContainer}>
@@ -192,15 +190,15 @@ function Checkout(props) {
           >
             Submit
           </button>
-        </form> */}
+        </form>
         <div css={rightContainer}>
           <div>
             <div css={lastSubContainerLeft}>
               <div>
                 <p>
-                  {/* Total Amount: {console.log(props.tour)}
-                  {toursTotalPrice(props.tour.amount, props.tour.price)}
-                  {' €'} */}
+                  Total Amount:
+                  {/* {toursTotalPrice(props.tour.amount, props.tour.price)} */}
+                  {' €'}
                 </p>
                 <p>Price Subtotal:</p>
                 <p>Shipping Fee:</p>
@@ -220,18 +218,18 @@ function Checkout(props) {
 export default Checkout;
 
 export function getServerSideProps(context) {
-  const tourId = context.query.tourId;
-  // console.log(getTourintoCart());
-  const { getTour } = import('../util/database');
+  // const tourId = context.query.tourId;
+  // // console.log(getTourintoCart());
+  // const { getTour } = import('../util/database');
 
-  const tourCart = getTour(tourId);
+  // const tourCart = getTour(tourId);
   // const cookies = context.req.cookies.idfromTourSelected || '[]';
   // const idfromTourSelected = JSON.parse(cookies);
   // console.log(cookies);
 
-  // to put together the right database and cookie through the id
-  // some will return true(a bolean) as soon as one value fits the written condition.
-  //   // After the first truthy condition it will stop running.
+  // // to put together the right database and cookie through the id
+  // // some will return true(a bolean) as soon as one value fits the written condition.
+  // // After the first truthy condition it will stop running.
 
   // const theCookie = tours.map((tour) => {
   //   const isIdTourSelected = idfromTourSelected.some((tourCookieObj) => {
@@ -258,7 +256,7 @@ export function getServerSideProps(context) {
 
   return {
     props: {
-      tourCart: tourCart,
+      // tourCart: tourCart,
     },
   };
 }

@@ -112,13 +112,6 @@ function Header(props: Props) {
                   </span>
                 </a>
               </Link>
-              <Link href="/check-out-page">
-                <a css={a}>
-                  <span role="img" aria-label="cart">
-                    +
-                  </span>
-                </a>
-              </Link>
             </li>
           </div>
         </ul>

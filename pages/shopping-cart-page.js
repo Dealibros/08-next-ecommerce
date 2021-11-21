@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Head from 'next/head';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import { getParsedCookie } from '../util/cookies';
@@ -354,7 +355,13 @@ function AddtoShoppingCart(props) {
                   </span>
                 </div>
               </div>
-              <button css={buttonCheckout}>Check Out</button>
+              <div>
+                <Link href="/check-out-page">
+                  <a>
+                    <button css={button}>Checkout</button>
+                  </a>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
