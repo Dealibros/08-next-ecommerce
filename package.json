@@ -1,6 +1,11 @@
 {
   "name": "08-next-ecommerce",
   "version": "0.1.0",
+  "engines": {
+    "npm": "7.20.0",
+    "node": "16.7.0",
+    "yarn": "1.22.5"
+  },
   "private": true,
   "cacheDirectories": [
     ".next/cache"
@@ -67,10 +72,5 @@
     "fs": false,
     "path": false,
     "os": false
-  },
-  "engines": {
-    "npm": "7.20.0",
-    "node": "16.7.0",
-    "yarn": "1.22.5"
   }
 }
