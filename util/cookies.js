@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie';
-import Tours from '../pages/tours';
 
 // To parse anything we get returned from the library js-cookie
 // set or get function

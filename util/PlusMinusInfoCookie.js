@@ -1,4 +1,3 @@
-import cookie from 'js-cookie';
 import { getParsedCookie, setParsedCookie } from '../util/cookies';
 
 export function findAndIncrementTour(tourId) {
