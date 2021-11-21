@@ -4,26 +4,20 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-               {' '}
         <Head>
-                   {' '}
           <link
             href="https://fonts.googleapis.com/css2?family=Alef:wght@700&display=swap"
             rel="stylesheet"
           />
-                   {' '}
           <link
             href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap"
             rel="stylesheet"
           />
-                 {' '}
         </Head>
-               {' '}
         <body>
-                    <Main />
-                    <NextScript />       {' '}
+          <Main />
+          <NextScript />     
         </body>
-             {' '}
       </Html>
     );
   }
